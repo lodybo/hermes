@@ -1,0 +1,22 @@
+{
+  "name": "hermes",
+  "version": "0.0.1",
+  "description": "A pub/sub library that enables you to send messages to registered subscribers. And to latecomers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lodybo/hermes.git"
+  },
+  "keywords": [
+    "pubsub"
+  ],
+  "author": "Lody Borgers",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lodybo/hermes/issues"
+  },
+  "homepage": "https://github.com/lodybo/hermes"
+}
