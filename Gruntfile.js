@@ -3,17 +3,24 @@ module.exports = function(grunt) {
   grunt.initConfig({
     jshint: {
       jshintrc: ".jshintrc",
-      files: ['Gruntfile.js', 'src/js/*.js', 'test/specs/*.js'],
+      files: ["Gruntfile.js", "src/js/*.js", "test/specs/*.js"],
     },
     jasmine: {
-      all: {
+      simple: {
         options: {
           specs: "test/specs/*.spec.js",
-          outFile: "test/jasmine/_SpecRunner.html",
-          template: require('grunt-template-jasmine-istanbul'),
+          outfile: "test/jasmine/_SpecRunner.html"
+        },
+        src: "src/js/*.js"
+      },
+      coverage: {
+        options: {
+          specs: "test/specs/*.spec.js",
+          outfile: "test/jasmine/_SpecRunner.html",
+          template: require("grunt-template-jasmine-istanbul"),
           templateOptions: {
-              coverage: 'test/jasmine/coverage/coverage.json',
-              report: 'test/jasmine/coverage',
+              coverage: "test/jasmine/coverage/coverage.json",
+              report: "test/jasmine/coverage",
               thresholds: {
                   lines: 75,
                   statements: 75,
@@ -62,8 +69,8 @@ module.exports = function(grunt) {
     }
   });
 
-  require('load-grunt-tasks')(grunt);
+  require("load-grunt-tasks")(grunt);
 
-  grunt.registerTask('default', ['jshint']);
+  grunt.registerTask("test", ["jshint", "jscs", "jasmine"]);
 
 };
