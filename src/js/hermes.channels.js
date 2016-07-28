@@ -7,19 +7,27 @@ window.hermes = (function (hermes) {
     var channels = [];
 
     // Create a new channel
-    function create(name) {
-      // Create a new channel
-      var newChannel = new Channel(name);
-      channels.push(newChannel);
+    function createChannel(name) {
+      // Check if our new channel already exists
+      var channel = registered(name);
 
-      // Return newly created channel
-      return newChannel;
+      if (!channel) {
+        // Create a new channel
+        var newChannel = new Channel(name);
+        channels.push(newChannel);
+
+        // Return newly created channel
+        return newChannel;
+      }
+
+      // Channel already exists, so we can just return that one
+      return channel;
     }
 
     // Loop through all the channels and see if we can find a name for the given match
     function registered(name) {
       for (var i=0; i<channels.length; i++) {
-        if (channels[i].channelName === name) {
+        if (channels[i].getName() === name) {
           // Found a match, let's return the channel!
           return channels[i];
         }
@@ -29,16 +37,56 @@ window.hermes = (function (hermes) {
       return false;
     }
 
+    // Delete a given channel
+    function deleteChannel(name) {
+      // Loop through every channel, and if we get a match then delete it
+      for (var i=0; i<channels.length; i++) {
+        if (channels[i].getName() === name) {
+          // Match! Empty the channel
+          channels[i] = null;
+
+          // Delete the key
+          channels.splice(i, 1);
+        }
+      }
+    }
+
+    // Rename a channel
+    function rename(channelName, newName) {
+      // Get the channel
+      var channel = registered(channelName);
+
+      // Rename it
+      channel.rename(newName);
+    }
+
     // Return interface
     return {
-      create: create,
-      registered: registered
+      create: createChannel,
+      registered: registered,
+      rename: rename,
+      delete: deleteChannel
     }
   }
 
   /// *** Class for a single Channel ***
   function Channel(channelName) {
-    this.channelName = channelName;
+    var channelName = channelName;
+
+    // Return the name of this channel
+    function name() {
+      return channelName;
+    }
+    // Rename this channel to the given new name
+    function rename(newName) {
+      channelName = newName;
+    }
+
+    // Return interface
+    return {
+      getName: name,
+      rename: rename
+    }
   }
 
   // Add Channels to Hermes
