@@ -8,6 +8,12 @@ window.hermes = (function (hermes) {
 
     // Create a new channel
     function createChannel(name) {
+      // Only proceed if a name is given
+      if (!name) {
+        hermes.throw("Error: no name is given when creating a channel!");
+        return;
+      }
+
       // Check if our new channel already exists
       var channel = registered(name);
 
@@ -39,6 +45,12 @@ window.hermes = (function (hermes) {
 
     // Delete a given channel
     function deleteChannel(name) {
+      // Only proceed if a name is given
+      if (!name) {
+        hermes.throw("Error: no name is given for deleting a channel!");
+        return;
+      }
+
       // Loop through every channel, and if we get a match then delete it
       for (var i=0; i<channels.length; i++) {
         if (channels[i].getName() === name) {
@@ -49,6 +61,9 @@ window.hermes = (function (hermes) {
           channels.splice(i, 1);
         }
       }
+
+      // No channel found, throw an error
+      hermes.throw("Error: Cannot delete 'testChannel', it does not exist.");
     }
 
     // Rename a channel

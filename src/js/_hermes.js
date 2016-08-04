@@ -21,9 +21,15 @@ window.hermes = (function () {
     return false;
   }
 
+  // Throw a given error for this library
+  function throwError(message) {
+    throw("[Hermes] " + message);
+  }
+
   // Return interface
   return {
     register: register,
-    registered: registered
+    registered: registered,
+    throw: throwError
   }
 })();
