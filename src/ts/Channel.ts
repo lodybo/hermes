@@ -13,7 +13,7 @@ class Channel {
 
         // If not present, create new topic
         if (presence === -1) {
-            presence = this.registerTopic(topicName); 
+            presence = this.registerTopic(topicName);
         }
 
         // Return topic
