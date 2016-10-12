@@ -1,10 +1,32 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
-    jshint: {
-      jshintrc: ".jshintrc",
-      files: ["Gruntfile.js", "src/js/*.js", "test/specs/*.js"],
+    // *** Compile
+    ts: {
+      compile: {
+        options: {
+          comments: true,
+          sourceRoot: "src/",
+          pretty: true,
+          tsconfig: "tsconfig.json"
+        },
+        src: ["src/**/*.ts", "!src/**/*.spec.ts"],
+        out: "build/hermes/hermes.js",
+      }
     },
+
+    // *** Code grammar check
+    tslint: {
+      options: {
+        configuration: "tslint.json",
+        force: false
+      },
+      files: {
+        src: "src/**/*.ts"
+      }
+    },
+
+    // *** Unit tests
     jasmine: {
       simple: {
         options: {
@@ -32,14 +54,8 @@ module.exports = function(grunt) {
         src: "src/js/*.js"
       }
     },
-    jscs: {
-      options: {
-        config: ".jscsrc"
-      },
-      files: {
-        src: ["src/js/*.js"]
-      }
-    },
+
+    // *** Building
     uglify: {
       minified: {
         options: {
@@ -66,11 +82,11 @@ module.exports = function(grunt) {
           "dist/hermes.js" : ["src/js/*.js"]
         }
       }
-    }
+    },
   });
 
   require("load-grunt-tasks")(grunt);
 
-  grunt.registerTask("test", ["jshint", "jscs", "jasmine"]);
+  grunt.registerTask("test", ["tslint", "jasmine"]);
 
 };

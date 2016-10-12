@@ -1,6 +1,6 @@
 {
   "name": "hermes",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "A pub/sub library that enables you to send messages to registered subscribers. And to latecomers.",
   "main": "index.js",
   "scripts": {
@@ -22,10 +22,12 @@
   "devDependencies": {
     "grunt": "^1.0.1",
     "grunt-contrib-jasmine": "^1.0.3",
-    "grunt-contrib-jshint": "1.0.0",
     "grunt-contrib-uglify": "^2.0.0",
-    "grunt-jscs": "^3.0.1",
     "grunt-template-jasmine-istanbul": "^0.5.0",
-    "load-grunt-tasks": "^3.5.0"
+    "grunt-ts": "^5.5.1",
+    "grunt-tslint": "^3.3.0",
+    "load-grunt-tasks": "^3.5.0",
+    "tslint": "^3.15.1",
+    "typescript": "^2.0.3"
   }
 }
