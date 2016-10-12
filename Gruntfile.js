@@ -83,10 +83,23 @@ module.exports = function(grunt) {
         }
       }
     },
+    watch: {
+      typescript: {
+        files: ["src/**/*.ts", "!src/**/*.spec.ts"],
+        tasks: ["tslint"]
+      },
+      tests: {
+        files: ["!src/**/*.ts", "src/**/*.spec.ts"],
+        tasks: ["test"]
+      }
+    }
   });
 
   require("load-grunt-tasks")(grunt);
 
   grunt.registerTask("test", ["tslint", "jasmine"]);
+  grunt.registerTask("build", ["test", "ts", "uglify"]);
+
+  grunt.registerTask("default", ["watch"]);
 
 };
