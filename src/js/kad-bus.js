@@ -1,18 +1,18 @@
 /**
- * <p>An implementation of a message bus system (a.k.a event bus) for Kadaster.</p>
+ * <p>An implementation of a message bus system (a.k.a event bus) for Hermes.</p>
  * <p>This implementation supports the use of channels and topics for a broader communication spectrum and performance.</p>
  * <p>It also provides you with the possibility of sending an event to those that have already subscribed ("standard" functionality) and to events that will describe in the future</p>
  * @name Bus
- * @namespace {object} Kadaster.Bus
- * @memberof Kadaster
+ * @namespace {object} Hermes.Bus
+ * @memberof Hermes
  * @type {object}
  */
 
-if (typeof Kadaster === "undefined") {
-	var Kadaster = {};
+if (typeof Hermes === "undefined") {
+	var Hermes = {};
 }
 
-Kadaster.bus = (function () {
+Hermes.bus = (function () {
 	"use strict";
 
 	// *** VARS
@@ -23,7 +23,7 @@ Kadaster.bus = (function () {
 	 * @method channelExists
 	 * @param {string} name - name of the channel we want to check
 	 * @returns {boolean|number} Returns the position if the channel is found, false otherwise
-	 * @memberof Kadaster.Bus
+	 * @memberof Hermes.Bus
 	 * @instance
 	 * @private
 	 */
@@ -46,7 +46,7 @@ Kadaster.bus = (function () {
 	 * @method channel
 	 * @param {string} name - name of the channel that you seek.
 	 * @returns {Channel} The channel that you want
-	 * @memberof Kadaster.Bus
+	 * @memberof Hermes.Bus
 	 * @instance
 	 * @public
 	 */
@@ -68,7 +68,7 @@ Kadaster.bus = (function () {
 	 * Registers a new channel to the Event bus. If the channel is already present, no action will be taken.
 	 * @method registerChannel
 	 * @param {string} name - name of the new channel
-	 * @memberof Kadaster.Bus
+	 * @memberof Hermes.Bus
 	 * @instance
 	 * @private
 	 */
@@ -83,7 +83,7 @@ Kadaster.bus = (function () {
 	 * @method removeChannel
 	 * @param {string} name - the name of the channel
 	 * @returns {boolean} True if success, false otherwise.
-	 * @memberof Kadaster.Bus
+	 * @memberof Hermes.Bus
 	 * @instance
 	 * @public
 	 */
@@ -107,7 +107,7 @@ Kadaster.bus = (function () {
 	 * @param {string} direction - the channel and event. Will be created if it doesn't exist
 	 * @param {function} func - the function to use when fire()'d.
 	 * @throws "No topic defined"
-	 * @memberof Kadaster.Bus
+	 * @memberof Hermes.Bus
 	 * @instance
 	 * @public
 	 */
@@ -126,12 +126,12 @@ Kadaster.bus = (function () {
 	/**
 	 * <p>Fires an event on a given channel, to all registered listeners. If no topic is defined, an error will be thrown.</p>
 	 * <p>If a duplicate function with the same direction (channel/topic) already is defined, then this function will return without adding the function again. This can be overruled by setting <strong>forced</strong> to true</p>
-	 * <p>Shortcut for {@link Kadaster.Bus.Channel.Topic#fire}.</p>
+	 * <p>Shortcut for {@link Hermes.Bus.Channel.Topic#fire}.</p>
 	 * @method fire
 	 * @param {string} direction - the channel and topic. Will be created if it doesn't exist
 	 * @param {object|string|number|boolean} data - a data object that will be passed to the listeners
 	 * @param {boolean} [forced] - add this function even if it's already defined in the collection of listeners
-	 * @memberof Kadaster.Bus
+	 * @memberof Hermes.Bus
 	 * @instance
 	 * @public
 	 */
@@ -152,7 +152,7 @@ Kadaster.bus = (function () {
 	 * @method fireDelayed
 	 * @param {string} direction - channel and topic name, will be created if they do not already exist. An error will be thrown if only a channel is defined.
 	 * @param {object|string|number|boolean} data - a data object that will be passed to the listeners
-	 * @memberof Kadaster.Bus
+	 * @memberof Hermes.Bus
 	 * @instance
 	 * @public
 	 */
@@ -174,7 +174,7 @@ Kadaster.bus = (function () {
 	 * @param {string} direction - channel and topic name. Will be created if they don't exist and it will throw an error if only a channel has been defined
 	 * @param {function} func - the function to execute when the event has been fire()'d
 	 * @param {boolean} [forced] - add this listener to the collection even if it's already been defined
-	 * @memberof Kadaster.Bus
+	 * @memberof Hermes.Bus
 	 * @instance
 	 * @public
 	 */
@@ -197,7 +197,7 @@ Kadaster.bus = (function () {
 	 * @class Channel
 	 * @param {type} argName
 	 * @returns {Channel}
-	 * @memberof Kadaster.Bus
+	 * @memberof Hermes.Bus
 	 * @private
 	 */
 	var Channel = function (argName) {
@@ -209,7 +209,7 @@ Kadaster.bus = (function () {
 		 * @method topicExists
 		 * @param {type} name -  the name of the topic
 		 * @returns {boolean|number} Returns false if the topic isn't listed in the topic collection, returns its position if it is
-		 * @memberof Kadaster.Bus.Channel
+		 * @memberof Hermes.Bus.Channel
 		 * @instance
 		 * @private
 		 */
@@ -231,7 +231,7 @@ Kadaster.bus = (function () {
 		 * Registers a new topic to the Event bus. If the topic is already present, no action will be taken.
 		 * @method registerTopic
 		 * @param {string} name - name of the new topic
-		 * @memberof Kadaster.Bus.Channel
+		 * @memberof Hermes.Bus.Channel
 		 * @instance
 		 * @private
 		 */
@@ -247,7 +247,7 @@ Kadaster.bus = (function () {
 		 * @method removeTopic
 		 * @param {string} name - the name of the topic
 		 * @returns {Boolean} True if success, false otherwise.
-		 * @memberof Kadaster.Bus.Channel
+		 * @memberof Hermes.Bus.Channel
 		 * @instance
 		 * @private
 		 */
@@ -268,7 +268,7 @@ Kadaster.bus = (function () {
 		 * @method topic
 		 * @param {string} name - name of the topic that you seek.
 		 * @returns {Topic} The topic that you want.
-		 * @memberof Kadaster.Bus.Channel
+		 * @memberof Hermes.Bus.Channel
 		 * @instance
 		 * @private
 		 */
@@ -292,7 +292,7 @@ Kadaster.bus = (function () {
 		 * @param {string} tpc - the topic to use. Will be created if it doesn't exist
 		 * @param {function} func - the function to be executed
 		 * @param {boolean} [forced] - If set to true, the listener will be registered even if they already have been registered
-		 * @memberof Kadaster.Bus.Channel
+		 * @memberof Hermes.Bus.Channel
 		 * @instance
 		 * @private
 		 */
@@ -306,7 +306,7 @@ Kadaster.bus = (function () {
 		 * @param {string} tpc - the topic name
 		 * @param {function} func - the function to execute
 		 * @param {boolean} forced - registers the listener even if it's already been registered
-		 * @memberof Kadaster.Bus.Channel
+		 * @memberof Hermes.Bus.Channel
 		 * @instance
 		 * @private
 		 */
@@ -319,7 +319,7 @@ Kadaster.bus = (function () {
 		 * @method fire
 		 * @param {string} tpc - the topic that you want to use, will be created if it doesn't exist.
 		 * @param data {Object|string|number|Boolean} a data object that will be passed to the listeners
-		 * @memberof Kadaster.Bus.Channel
+		 * @memberof Hermes.Bus.Channel
 		 * @instance
 		 * @private
 		 */
@@ -331,7 +331,7 @@ Kadaster.bus = (function () {
 		 * @method fireDelayed
 		 * @param {string} tpc - the name of the topic
 		 * @param {object|string|number} data - data to be passed to the listeners
-		 * @memberof Kadaster.Bus.Channel
+		 * @memberof Hermes.Bus.Channel
 		 * @instance
 		 * @private
 		 */
@@ -343,7 +343,7 @@ Kadaster.bus = (function () {
 		 * Sets the name of the channel. Can also be set using new Channel(name).
 		 * @method setName
 		 * @param {string} argName - name of the channel
-		 * @memberof Kadaster.Bus.Channel
+		 * @memberof Hermes.Bus.Channel
 		 * @instance
 		 * @private
 		 */
@@ -355,7 +355,7 @@ Kadaster.bus = (function () {
 		 * Returns the name of the current channel
 		 * @method getName
 		 * @returns {string} the name of the channel
-		 * @memberof Kadaster.Bus.Channel
+		 * @memberof Hermes.Bus.Channel
 		 * @instance
 		 * @private
 		 */
@@ -369,14 +369,14 @@ Kadaster.bus = (function () {
 	 * @class Topic
 	 * @param {type} argName
 	 * @returns {Topic}
-	 * @memberof Kadaster.Bus
+	 * @memberof Hermes.Bus
 	 * @private
 	 */
 	var Topic = function (argName) {
 		/**
 		 * Topic name
 		 * @member name
-		 * @memberof Kadaster.Bus.Topic
+		 * @memberof Hermes.Bus.Topic
 		 * @type {string}
 		 * @private
 		 * @instance
@@ -386,7 +386,7 @@ Kadaster.bus = (function () {
 		/**
 		 * Listener collection
 		 * @member listeners
-		 * @memberof Kadaster.Bus.Topic
+		 * @memberof Hermes.Bus.Topic
 		 * @type {array}
 		 * @private
 		 * @instance
@@ -396,7 +396,7 @@ Kadaster.bus = (function () {
 		/**
 		 * Delayed listener collection, these listeners will get a message upon registering even if it has already been fired
 		 * @member delayedListeners
-		 * @memberof Kadaster.Bus.Topic
+		 * @memberof Hermes.Bus.Topic
 		 * @type {array}
 		 * @private
 		 * @instance
@@ -406,7 +406,7 @@ Kadaster.bus = (function () {
 		/**
 		 * History of calls for delayed listeners, every delayedFire()'d call is logged here for newly registered listeners to call upon
 		 * @member delayedCallHistory
-		 * @memberof Kadaster.Bus.Topic
+		 * @memberof Hermes.Bus.Topic
 		 * @type {object}
 		 * @private
 		 * @instance
@@ -418,7 +418,7 @@ Kadaster.bus = (function () {
 		 * @method whenFired
 		 * @param {function} func - the function to be executed
 		 * @param {boolean} forced - register the listener even if it already has been registered
-		 * @memberof Kadaster.Bus.Topic
+		 * @memberof Hermes.Bus.Topic
 		 * @instance
 		 * @private
 		 */
@@ -456,7 +456,7 @@ Kadaster.bus = (function () {
 		 * fires the event, causing all listener functions to be executed
 		 * @method fire
 		 * @param {object|string|number|boolean} data - a data object that will be passed to the listeners
-		 * @memberof Kadaster.Bus.Topic
+		 * @memberof Hermes.Bus.Topic
 		 * @instance
 		 * @private
 		 */
@@ -472,7 +472,7 @@ Kadaster.bus = (function () {
 		 * @method whenFiredDelayed
 		 * @param {function} func - The function to be executed
 		 * @param {boolean} [forced] - Add the listener even if it's already been defined
-		 * @memberof Kadaster.Bus.Topic
+		 * @memberof Hermes.Bus.Topic
 		 * @instance
 		 * @private
 		 */
@@ -516,7 +516,7 @@ Kadaster.bus = (function () {
 		 * Then saves the data in history
 		 * @method fireDelayed
 		 * @param {object|string|number|boolean} data - a data object that will be passed to the delayed listeners
-		 * @memberof Kadaster.Bus.Topic
+		 * @memberof Hermes.Bus.Topic
 		 * @instance
 		 * @private
 		 */
@@ -534,7 +534,7 @@ Kadaster.bus = (function () {
 		 * Sets the name of the topic. Can also be set using new topic(name).
 		 * @method setNme
 		 * @param {string} argName - name of the topic
-		 * @memberof Kadaster.Bus.Topic
+		 * @memberof Hermes.Bus.Topic
 		 * @instance
 		 * @private
 		 */
@@ -546,7 +546,7 @@ Kadaster.bus = (function () {
 		 * Returns the name of the current topic
 		 * @method getName
 		 * @returns {string} the name of the topic
-		 * @memberof Kadaster.Bus.Topic
+		 * @memberof Hermes.Bus.Topic
 		 * @instance
 		 * @private
 		 */
